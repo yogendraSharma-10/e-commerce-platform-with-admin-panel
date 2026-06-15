@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
-use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\Cart; // Assuming Cart model exists
+use App\Models\CartItem; // Assuming CartItem model exists
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,4 +21,4 @@ class CartController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/v1/cart
+     *     path="/api/v1/
