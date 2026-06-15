@@ -1,0 +1,64 @@
+includes:
+    # Include the Laravel PHPStan extension for better analysis of Laravel-specific code.
+    # This extension provides type inference for Eloquent models, query builders, facades,
+    # and other common Laravel patterns, significantly reducing false positives.
+    - vendor/phpstan/phpstan-laravel/extension.neon
+
+    # Include the PHPUnit PHPStan extension for improved analysis of test files.
+    # This helps in correctly inferring types within PHPUnit test cases and assertions.
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+
+parameters:
+    # Set the analysis level to 8, which is the highest and most strict level.
+    # This ensures a very thorough static analysis, catching potential bugs and
+    # enforcing strict type safety, crucial for production-quality code.
+    level: 8
+
+    # Define the directories and files that PHPStan should analyze.
+    # - `app/`: Contains all application logic (controllers, models, services, etc.).
+    # - `routes/`: Contains API and web route definitions.
+    # - `tests/`: Contains feature and unit tests.
+    # - `database/seeders/`: Contains database seeders, which might have complex logic.
+    paths:
+        - app/
+        - routes/
+        - tests/
+        - database/seeders/
+
+    # Define paths that PHPStan should explicitly exclude from analysis.
+    # - `database/migrations/*`: Migration files often contain dynamic schema definitions
+    #   that are hard for static analysis and are less critical for runtime type safety.
+    # - `bootstrap/cache/*`: Laravel's cached files, not meant for direct analysis.
+    # - `storage/*`: User-uploaded files, logs, and other generated content.
+    # - `vendor/*`: Third-party dependencies, which are assumed to be type-safe.
+    # - `public/*`: Public assets and the entry point `index.php`.
+    excludePaths:
+        - database/migrations/*
+        - bootstrap/cache/*
+        - storage/*
+        - vendor/*
+        - public/*
+
+    # Classes that are considered "universal object crates".
+    # This is particularly useful for Laravel Facades, where properties and methods
+    # are dynamically resolved. PHPStan will treat these classes more leniently
+    # regarding property and method existence checks.
+    universalObjectCratesClasses:
+        - Illuminate\Support\Facades\Facade
+
+    # Enable checking for missing iterable value types (e.g., `array<string>` instead of `array`).
+    # This promotes more precise type hints for collections and arrays.
+    checkMissingIterableValueType: true
+
+    # Enable checking for generic classes used in non-generic object types.
+    # This helps ensure that generic types (like `Collection<Product>`) are used
+    # consistently and correctly.
+    checkGenericClassInNonGenericObjectType: true
+
+    # You can add specific errors to ignore here if absolutely necessary.
+    # Use this sparingly and always with a clear justification, as it can hide real issues.
+    # Example:
+    # ignoreErrors:
+    #     - '#Call to an undefined method [a-zA-Z0-9\\_]+::someMethod\(\)#'
+    #     - '#Method [a-zA-Z0-9\\_]+::someOtherMethod\(\) invoked with [0-9]+ parameters, [0-9]+ required\.#'
+```
