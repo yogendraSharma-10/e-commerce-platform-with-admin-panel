@@ -1,0 +1,45 @@
+# Laravel & Node.js Specific Ignores
+/vendor
+/node_modules
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Laravel Storage & Cache
+/storage/*.key
+/bootstrap/cache/*.php
+/storage/logs/*.log
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/app/public/* # If public storage is symlinked, this should be ignored. If not, remove.
+
+# Frontend Build Artifacts
+/public/hot
+/public/build # Vite's default output directory
+.vite/ # Vite cache directory
+
+# PHPStan Cache
+/tmp/phpstan # Or whatever directory is configured in phpstan.neon for cache
+
+# Docker Specific
+docker-compose.override.yml # For local development overrides
+.docker/ # If custom docker files are generated locally
+
+# Testing
+/coverage/
+
+# Other temporary files
+*.swp
+*.swo
+*.log
+*.bak
+*.tmp

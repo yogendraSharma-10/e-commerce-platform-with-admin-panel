@@ -1,0 +1,132 @@
+```json
+{
+  "compilerOptions": {
+    /**
+     * Target JavaScript language version for emitted JavaScript.
+     * ESNext targets the latest ECMAScript features, suitable for modern browsers and bundlers like Vite.
+     */
+    "target": "ESNext",
+
+    /**
+     * Emit distinct declarations for class fields.
+     * Recommended for compatibility with modern JavaScript class field syntax.
+     */
+    "useDefineForClassFields": true,
+
+    /**
+     * Specify module code generation: 'ESNext' for modern module systems.
+     * This is crucial for Vite, which uses native ES modules.
+     */
+    "module": "ESNext",
+
+    /**
+     * Determine how modules are resolved. 'bundler' is recommended for Vite
+     * as it aligns with how bundlers like Rollup (used by Vite) resolve modules.
+     */
+    "moduleResolution": "bundler",
+
+    /**
+     * Enable all strict type-checking options.
+     * This is highly recommended for production-quality code to ensure type safety.
+     */
+    "strict": true,
+
+    /**
+     * Support JSX in .tsx files. 'preserve' means JSX is left as-is for the bundler (Vite) to handle.
+     * Even for Vue, if using JSX syntax (e.g., with render functions), this is relevant.
+     */
+    "jsx": "preserve",
+
+    /**
+     * Generates corresponding .map files for emitted JavaScript.
+     * Useful for debugging in development and production.
+     */
+    "sourceMap": true,
+
+    /**
+     * Include modules imported with '.json' extension.
+     * Allows importing JSON files directly in TypeScript.
+     */
+    "resolveJsonModule": true,
+
+    /**
+     * Ensure that each file can be safely transpiled without relying on other files.
+     * Essential for bundlers like Vite that process files individually.
+     */
+    "isolatedModules": true,
+
+    /**
+     * Enables compatibility for importing CommonJS modules as ES modules.
+     * Important for working with mixed module systems.
+     */
+    "esModuleInterop": true,
+
+    /**
+     * Specify a list of library files to be included in the compilation.
+     * 'ESNext' for latest JavaScript features, 'DOM' and 'DOM.Iterable' for browser APIs.
+     */
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+
+    /**
+     * Skip type checking of all declaration files (*.d.ts).
+     * Can speed up compilation, especially in projects with many third-party libraries.
+     */
+    "skipLibCheck": true,
+
+    /**
+     * Do not emit outputs (JavaScript files).
+     * Vite handles the actual transpilation and bundling, so TypeScript only performs type checking.
+     */
+    "noEmit": true,
+
+    /**
+     * Base directory to resolve non-absolute module names.
+     * Set to '.' to resolve paths relative to the project root.
+     */
+    "baseUrl": ".",
+
+    /**
+     * A series of entries which re-map imports to lookup locations relative to the 'baseUrl'.
+     * Configures aliases for easier imports, matching Vite's default setup and project structure.
+     */
+    "paths": {
+      "@/*": ["./resources/js/*"], // General alias for the main JS directory
+      "@admin/*": ["./resources/js/admin/*"], // Alias for admin-specific modules
+      "@shop/*": ["./resources/js/shop/*"], // Alias for shop-specific modules
+      "@shared/*": ["./resources/js/components/shared/*"] // Alias for shared Vue components
+    },
+
+    /**
+     * Specify type package names to be included in compilation.
+     * 'node' for Node.js types, 'vite/client' for Vite-specific client types,
+     * 'vue/ref-macros' for Vue 3's reactivity transform macros (e.g., `defineProps`, `defineEmits`).
+     */
+    "types": [
+      "node",
+      "vite/client",
+      "vue/ref-macros"
+    ]
+  },
+  /**
+   * Specifies an array of filenames or patterns to include in the program.
+   * This tells TypeScript which files to type-check.
+   * Includes all TypeScript and Vue files within the 'resources/js' directory.
+   */
+  "include": [
+    "resources/js/**/*.ts",
+    "resources/js/**/*.d.ts",
+    "resources/js/**/*.vue"
+  ],
+  /**
+   * Specifies an array of filenames or patterns that should be skipped when resolving 'include'.
+   * Standard directories to exclude from type checking.
+   */
+  "exclude": [
+    "node_modules", // Standard exclusion for installed packages
+    "public",       // Public assets directory
+    "vendor",       // Composer dependencies
+    "bootstrap",    // Laravel's bootstrap files
+    "storage"       // Laravel's storage directory
+  ]
+}
+```
